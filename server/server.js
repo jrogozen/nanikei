@@ -10,13 +10,7 @@ import api from './api'
 
 // require('./db')
 
-let DEBUG;
-
-if (__DEV__) {
-  DEBUG = true;
-} else {
-  DEBUG = false;
-}
+const DEBUG = process.env.NODE_ENV !== 'production'
 
 const server = express()
 
