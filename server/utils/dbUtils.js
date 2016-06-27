@@ -7,7 +7,7 @@ export const query = (client) => {
       client.query(sql, values, (err, result) => {
         if (err) {
           console.log(chalk.red.bold('error running SQL', err))
-          console.log(sql, values)
+          console.log('tried sql query:', sql, values)
           reject(err)
         }
 
