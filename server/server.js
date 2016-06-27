@@ -8,7 +8,11 @@ import path from 'path'
 import api from './api'
 // import isomorpher from './middleware/isomorpher'
 
-// require('./db')
+require('./db')
+
+if (process.env.SEED) {
+  require('./seed')
+}
 
 const DEBUG = process.env.NODE_ENV !== 'production'
 
@@ -22,28 +26,28 @@ server.use(cookieParser())
 server.use(compression())
 
 if (DEBUG) {
-  const webpack = require('webpack')
-  const webpackConfig = require('../../webpack.config.babel.js')
-  const compiler = webpack(webpackConfig)
+  // const webpack = require('webpack')
+  // const webpackConfig = require('../../webpack.config.babel.js')
+  // const compiler = webpack(webpackConfig)
 
-  server.use(require('webpack-dev-middleware')(compiler, {
-    publicPath: webpackConfig.output.publicPath,
-    noInfo: false,
-    lazy: false,
-    stats: {
-      colors: true,
-      hah: false,
-      timings: true,
-      chunks: false,
-      chunkModules: false,
-      modules: false
-    }
-  }))
+  // server.use(require('webpack-dev-middleware')(compiler, {
+  //   publicPath: webpackConfig.output.publicPath,
+  //   noInfo: false,
+  //   lazy: false,
+  //   stats: {
+  //     colors: true,
+  //     hah: false,
+  //     timings: true,
+  //     chunks: false,
+  //     chunkModules: false,
+  //     modules: false
+  //   }
+  // }))
 
-  server.use(require('webpack-hot-middleware')(compiler, {
-    log: console.log,
-    path: '/__webpack_hmr'
-  }))
+  // server.use(require('webpack-hot-middleware')(compiler, {
+  //   log: console.log,
+  //   path: '/__webpack_hmr'
+  // }))
 } else {
   server.use(express.static(path.resolve(__dirname, '../dist')))
   server.use(morgan('combined'))
