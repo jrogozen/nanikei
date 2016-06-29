@@ -13,7 +13,6 @@ module.exports = {
   },
   entry: [
     'babel-polyfill',
-    'webpack-hot-middleware/client',
     path.join(__dirname, '..', 'app', 'index')
   ],
   output: {
@@ -26,7 +25,7 @@ module.exports = {
     new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
-      __DEV__: process.env.NODE === 'development'
+      __DEV__: process.env.NODE_ENV === 'development'
     }) 
   ],
   resolve: {
