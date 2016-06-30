@@ -1,0 +1,36 @@
+require('es6-promise').polyfill();
+import fetch from 'isomorphic-fetch'
+
+import { formatEndpoint } from 'app/utils/ApiUtils'
+
+const checkStatus = (response) => {
+  if (response.status >= 200 && response.status < 300) {
+    return response
+  } else {
+    console.log('API Request Failed', response)
+
+    throw new Error(response.statusText)
+  }
+}
+
+const parseJSON = (repsonse) => {
+  return response.json()
+}
+
+const requester = (options) => {
+  const { method, path, queryParams, body } = options
+
+  return fetch(formatEndpoint(path), {
+    method,
+    headers: {
+      'Accept': 'application/json',
+      'Content-type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  })
+    .then(checkStatus)
+    .then(parseJSON)
+    .catch((err) => err)
+}
+
+export default requester

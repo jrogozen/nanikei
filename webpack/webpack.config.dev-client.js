@@ -4,27 +4,33 @@ var autoprefixer = require('autoprefixer');
 // var cssnano = require('cssnano');
 
 module.exports = {
-  root: path.join(__dirname, '..'),
+  name: 'client side rendering',
+  context: path.resolve(__dirname, '..'),
+  target: 'web',
+  root: path.resolve(__dirname, '..'),
   devtool: 'eval-source-map',
   alias: {
-    'nanikei': __dirname,
+    'nanikei': __dirname, // doesn't work
+    'config': 'config',
     'app': 'app',
     'server': 'server'
   },
   entry: [
     'babel-polyfill',
-    path.join(__dirname, '..', 'app', 'index')
+    path.resolve(__dirname, '..', 'app')
   ],
   output: {
-    path: path.join(__dirname, '..', 'dist'),
+    path: path.resolve(__dirname, '..', 'dist'),
     filename: 'bundle.js',
     publicPath: '/dist'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
-    new webpack.HotModuleReplacementPlugin(),
+    // new webpack.HotModuleReplacementPlugin(),
     new webpack.NoErrorsPlugin(),
     new webpack.DefinePlugin({
+      __CLIENT__: true,
+      __SERVER__: false,
       __DEV__: process.env.NODE_ENV === 'development'
     }) 
   ],

@@ -56,7 +56,30 @@ function renderer(req, res, next) {
       const html = handleRenderToString(store, renderProps)
       const finalState = store.getState()
 
-      res.send(renderFullPage(html, finalState))
+      let promises = []
+      let reactContext = {
+        store: store,
+        location: renderProps.location
+      }
+
+      renderProps.components.forEach((route) => {
+        if (route && route.serverRouteWillMount) {
+          promises.push(route.serverRouteWillMount(reactContext))
+        }
+      })
+
+      return Promise.all(_.flatten(promises))
+        .then(() => {
+          try {
+            res.send(renderFullPage(html, finalState))
+          } catch(err) {
+            throw new Error(err)
+          }
+        })
+        .catch((err) => {
+          res.send(renderToString(<div>Error! {err}</div>))
+        })
+
     } else {
       res.status(404).send('Not found')
     }

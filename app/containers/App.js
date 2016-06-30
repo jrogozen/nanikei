@@ -5,7 +5,7 @@ const App = React.createClass({
   render: function() {
     return (
       <div id="App" className="App">
-        <h1>Apps</h1>
+        <h1>App</h1>
         {React.cloneElement(this.props.children)}
       </div>
     )
