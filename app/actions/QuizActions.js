@@ -12,11 +12,11 @@ const QuizActions = {
         })
     }
   },
-  fetchVerbs: (language) => {
+  fetchVerbs: ({ language, conjugations }) => {
     return (dispatch) => {
       dispatch(QuizActions.setStatus(constants.QUIZ_ACTIVE))
 
-      return api.verbs({ language })
+      return api.verbs({ language, conjugations })
         .then((response) => {
           if (response.success && response.data) {
             dispatch(QuizActions.setVerbs(response.data))

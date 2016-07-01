@@ -15,7 +15,8 @@ const quiz = (state = initState(), action = {}) => {
   switch (type) {
     case constants.SET_POSSIBLE_CONJUGATIONS:
       return _.assign({}, state, {
-        possibleConjugations: payload
+        possibleConjugations: payload,
+        selectedConjugations: payload
       })
     case constants.SET_SELECTED_CONJUGATIONS:
       return _.assign({}, state, {

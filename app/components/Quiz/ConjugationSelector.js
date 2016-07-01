@@ -3,6 +3,7 @@ import React from 'react'
 import { connect } from 'react-redux'
 
 import QuizActions from 'app/actions/QuizActions'
+import { stringUtils } from 'app/utils/formatter'
 
 const ConjugationSelector = React.createClass({
   propTypes: {
@@ -58,7 +59,8 @@ const ConjugationSelector = React.createClass({
           {_.map(conjugations, (value, conjugation) => {
             return (
               <li key={conjugation}>
-                <input type="checkbox" checked={value} onChange={this.onValueChange.bind(this, conjugation)}/>{conjugation}
+                <input type="checkbox" checked={value} onChange={this.onValueChange.bind(this, conjugation)}/>
+                {stringUtils.underScoreToTitle(conjugation)}
               </li>
             )
           })}

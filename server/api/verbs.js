@@ -12,14 +12,28 @@ const handleError = (res, err) => {
   })
 }
 
+const requireValue = (value, i) => {
+  return `${i === 0 ? ' WHERE' : ' AND'} ${value} IS NOT NULL AND ${value} <> '' AND ${value} <> 'X'`
+}
+
 export default function verbs(router) {
   router.get('/verbs', (req, res, next) => {
-    let { limit, language } = req.query
+    let { limit, language, conjugations } = req.query
     
     language = language || constants.DEFAULT_LANGUAGE
     limit = limit || 20
 
-    query(`SELECT * from ${language} ORDER BY random() LIMIT ${limit}`)
+    let sql = `SELECT * from ${language}`
+
+    if (conjugations) {
+      conjugations.split(',').forEach((conjugation, i) => {
+        sql += requireValue(conjugation, i)
+      })
+    }
+
+    sql += ` ORDER BY random() LIMIT ${limit}`
+
+    query(sql)
       .then((data) => {
         if (data && !_.isEmpty(data.rows)) {
           res.send({
@@ -47,7 +61,9 @@ export default function verbs(router) {
       .then((data) => {
         if (data && !_.isEmpty(data.rows)) {
           let columns = data.rows.map((column) => {
-            if (column && column.column_name !== 'id') {
+            // todo: extract this
+            if (column && column.column_name !== 'id' && column.column_name !== 'definition'
+                && column.column_name !== 'dictionary_form' && column.column_name !== 'hiragana') {
               return column.column_name
             }
           }).filter((columnName) => columnName)
