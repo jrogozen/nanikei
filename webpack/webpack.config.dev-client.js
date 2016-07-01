@@ -7,8 +7,7 @@ module.exports = {
   name: 'client side rendering',
   context: path.resolve(__dirname, '..'),
   target: 'web',
-  root: path.resolve(__dirname, '..'),
-  devtool: 'eval-source-map',
+  devtool: 'cheap-eval-source-map',
   alias: {
     'nanikei': __dirname, // doesn't work
     'config': 'config',
@@ -44,7 +43,7 @@ module.exports = {
         test: /\.js$/,
         loader: 'babel',
         exclude: /node_modules/,
-        include: path.join(__dirname, '..')
+        // include: path.resolve(__dirname, '..')
       },
       {
         test: /\.json$/,
@@ -53,7 +52,7 @@ module.exports = {
       {
         test: /\.scss$/,
         loader: 'style-loader!css-loader!sass-loader',
-        include: path.join(__dirname, '..')
+        include: path.resolve(__dirname, '..')
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/, 

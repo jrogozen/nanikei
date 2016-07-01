@@ -25,7 +25,6 @@ server.use(bodyParser.urlencoded({ extended: false }))
 server.use(cookieParser())
 server.use(compression())
 
-
 if (DEBUG) {
   const webpack = require('webpack')
   const webpackConfig = require('../webpack/webpack.config.dev-client.js')
@@ -44,11 +43,12 @@ if (DEBUG) {
       modules: false
     }
   }))
+  server.use(morgan('dev'))
 } else {
   server.use(express.static(path.resolve(__dirname, '../dist')))
+  server.use(morgan('tiny'))
 }
 
-server.use(morgan('combined'))
 server.use('/api', api)
 server.use(renderer)
 

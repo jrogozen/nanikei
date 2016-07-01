@@ -1,12 +1,15 @@
 import _ from 'lodash'
+import chalk from 'chalk'
 import qs from 'qs'
 import React from 'react'
 import { match, RouterContext } from 'react-router'
 import { renderToString } from 'react-dom/server'
 import { Provider } from 'react-redux'
 
-import configureStore from '../../app/configureStore'
-import routes from '../../app/routes'
+import configureStore from 'app/configureStore'
+import routes from 'app/routes'
+import rootReducer from 'app/reducers'
+import ErrorPage from 'app/containers/ErrorPage'
 
 function renderFullPage(html, initialState) {
   return `
@@ -44,7 +47,6 @@ function handleRenderToString(store, renderProps) {
 
 function renderer(req, res, next) {
   const params = qs.parse(req.query)
-  let initialState = {}
 
   match({ routes, location: req.url }, (error, redirectLocation, renderProps) => {
     if (error) {
@@ -52,9 +54,7 @@ function renderer(req, res, next) {
     } else if (redirectLocation) {
       res.redirect(302, redirectLocation.pathname + redirectLocation.search)
     } else if (renderProps) {
-      const store = configureStore(initialState)
-      const html = handleRenderToString(store, renderProps)
-      const finalState = store.getState()
+      const store = configureStore()
 
       let promises = []
       let reactContext = {
@@ -70,14 +70,20 @@ function renderer(req, res, next) {
 
       return Promise.all(_.flatten(promises))
         .then(() => {
+          const html = handleRenderToString(store, renderProps)
+          const finalState = store.getState()
+          let renderedPage;
+
           try {
-            res.send(renderFullPage(html, finalState))
+            renderedPage = renderFullPage(html, finalState)
+
+            res.send(renderedPage)
           } catch(err) {
             throw new Error(err)
           }
         })
         .catch((err) => {
-          res.send(renderToString(<div>Error! {err}</div>))
+          res.send(renderToString(<ErrorPage error={err} />))
         })
 
     } else {

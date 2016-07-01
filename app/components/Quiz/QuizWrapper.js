@@ -1,17 +1,22 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import QuizActions from 'app/actions/QuizActions'
+import QuizCard from 'app/components/Quiz/QuizCard'
+
 const QuizWrapper = React.createClass({
-  statics: {
-    serverRouteWillMount(reactContext) {
+  fetchVerbs() {
+    let { dispatch } = this.props
 
-    }
-  },
-  componentDidMount() {
-
+    dispatch(QuizActions.fetchVerbs('japanese'))
   },
   render() {
-
+    return (
+      <QuizCard
+        title="Conjugation Quiz"
+        startText="スタート (start)"
+      />
+    )
   }
 })
 

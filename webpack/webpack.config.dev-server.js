@@ -34,7 +34,6 @@ module.exports = {
     // The configuration for the server-side rendering
     name: "server-side rendering",
     context: path.join(__dirname, '..'),
-    root: path.join(__dirname, '..'),
     alias: {
       'nanikei': __dirname, // doesn't work
       'config': 'config',
@@ -46,9 +45,11 @@ module.exports = {
     },
     node: {
       __dirname: true,
-      __filename: true
+      __filename: true,
+      console: true
     },
     target: "node",
+    devtool: 'cheap-eval-source-map',
     output: {
       // The output directory as absolute path
       path: assetsPath,

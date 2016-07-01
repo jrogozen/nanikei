@@ -1,20 +1,21 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
-import requester from 'app/utils/requester'
+import QuizActions from 'app/actions/QuizActions'
+import QuizWrapper from 'app/components/Quiz/QuizWrapper'
 
 const FrontPage = React.createClass({
-  componentDidMount() {
-    requester({
-      method: 'get',
-      path: 'api/verbs',
-      queryParams: 'korean'
-    })
+  statics: {
+    serverRouteWillMount(reactContext) {
+      let { dispatch } = reactContext.store
+
+      return dispatch(QuizActions.fetchConjugations('japanese'))
+    }
   },
   render: function() {
     return (
       <div className="FrontPage container">
-        <h2>Front Pages</h2>
+        <QuizWrapper />
       </div>
     )
   }

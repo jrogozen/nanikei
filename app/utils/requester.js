@@ -13,14 +13,14 @@ const checkStatus = (response) => {
   }
 }
 
-const parseJSON = (repsonse) => {
+const parseJSON = (response) => {
   return response.json()
 }
 
 const requester = (options) => {
   const { method, path, queryParams, body } = options
 
-  return fetch(formatEndpoint(path), {
+  return fetch(formatEndpoint(path, queryParams), {
     method,
     headers: {
       'Accept': 'application/json',
