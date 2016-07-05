@@ -45,7 +45,7 @@ if (DEBUG) {
   }))
   server.use(morgan('dev'))
 } else {
-  server.use(express.static(path.resolve(__dirname, '../dist')))
+  server.use('/dist', express.static(path.resolve(__dirname, '../dist')))
   server.use(morgan('tiny'))
 }
 
