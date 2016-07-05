@@ -4,14 +4,15 @@
   "description": "japanese verb conjugation quiz",
   "main": "server/index.js",
   "scripts": {
-    "start": "npm run clean && npm run build:dev:server && npm run build:dev:client && npm run babel-node:prod -- dist/server.js",
+    "start": "npm run babel-node:prod -- dist/server.js",
     "seed": "NODE_ENV=development SEED=true node server",
     "clean": "rm -rf dist",
     "babel-node": "babel-node --presets es2015,stage-0 --ignore node_modules,dist",
     "babel-node:prod": "NODE_ENV=production babel-node --presets es2015,stage-0 --ignore node_modules,dist",
     "build:dev:server": "NODE_ENV=development webpack --colors --config ./webpack/webpack.config.dev-server",
     "build:dev:client": "NODE_ENV=development webpack --colors --config ./webpack/webpack.config.dev-client",
-    "dev": "NODE_ENV=development nodemon"
+    "dev": "NODE_ENV=development nodemon",
+    "postinstall": "npm run clean && npm run build:dev:server && npm run build:dev:client"
   },
   "author": "jon rogozen",
   "license": "MIT",
