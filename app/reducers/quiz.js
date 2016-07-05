@@ -6,7 +6,9 @@ const initState = () => ({
   possibleConjugations: [],
   selectedConjugations: [],
   verbs: [],
-  currentIndex: 0
+  currentIndex: 0,
+  correct: 0,
+  incorrect: 0
 })
 
 const quiz = (state = initState(), action = {}) => {
@@ -30,6 +32,15 @@ const quiz = (state = initState(), action = {}) => {
     case constants.SET_STATUS:
       return _.assign({}, state, {
         status: payload
+      })
+    case constants.INCREMENT_INDEX:
+      return _.assign({}, state, {
+        currentIndex: state.currentIndex + 1
+      })
+    case constants.LOG_ANSWER:
+      return _.assign({}, state, {
+        correct: payload ? state.correct + 1 : state.correct,
+        incorrect: payload ? state.incorrect : state.incorrect + 1
       })
     case constants.RESET_QUIZ:
       return initState()

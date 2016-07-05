@@ -8,7 +8,7 @@ const QuizWrapper = React.createClass({
   fetchVerbs() {
     let { dispatch, selectedConjugations } = this.props
 
-    dispatch(QuizActions.fetchVerbs({
+    return dispatch(QuizActions.fetchVerbs({
       language: 'japanese',
       conjugations: selectedConjugations
     }))
@@ -19,8 +19,11 @@ const QuizWrapper = React.createClass({
   render() {
     return (
       <QuizCard
+        currentIndex={this.props.currentIndex}
         handleStart={this.handleStart}
+        selectedConjugations={this.props.selectedConjugations}
         startText="スタート (start)"
+        status={this.props.status}
         title="Conjugation Quiz"
         verbs={this.props.verbs}
       />
@@ -29,7 +32,9 @@ const QuizWrapper = React.createClass({
 })
 
 const mapStateToProps = (state) => ({
+  currentIndex: state.quiz.currentIndex,
   selectedConjugations: state.quiz.selectedConjugations,
+  status: state.quiz.status,
   verbs: state.quiz.verbs
 })
 

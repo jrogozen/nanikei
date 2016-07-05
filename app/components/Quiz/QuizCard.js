@@ -1,7 +1,10 @@
 import React from 'react'
 
+import constants from 'config/constants'
 import ConjugationSelector from 'app/components/Quiz/ConjugationSelector'
 import NKButton from 'app/components/NKButton'
+import QuizScore from 'app/components/Quiz/QuizScore'
+import QuizQuestion from 'app/components/Quiz/QuizQuestion'
 
 const QuizCard = React.createClass({
   propTypes: {
@@ -10,23 +13,48 @@ const QuizCard = React.createClass({
     title: React.PropTypes.string,
     verbs: React.PropTypes.array
   },
+  chooseDisplay() {
+    let { selectedConjugations, title, startText, handleStart, currentIndex, status, verbs } = this.props
+
+    switch (status) {
+      case constants.QUIZ_PENDING:
+        return (
+          <div>
+            <ConjugationSelector />
+            <NKButton handleClick={handleStart} text={startText}/>
+          </div>
+        )
+      case constants.QUIZ_ACTIVE:
+        return (
+          <div>
+            <QuizQuestion
+              currentIndex={currentIndex}
+              selectedConjugations={selectedConjugations}
+              verbs={verbs}
+            />
+            <QuizScore />
+          </div>
+        )
+      case constants.QUIZ_LOADING:
+        return <h1>Loading Placeholder</h1>
+      case  constants.QUIZ_RESULTS:
+        return (
+          <div>
+            <h1>Quiz Over Placeholder</h1>
+            <QuizScore />
+          </div>
+        )
+      default:
+        return <div />
+    }
+  },
   render() {
     let { title, startText, handleStart, verbs } = this.props
 
     return (
       <div className="QuizCard">
         <h2>{title}</h2>
-        <ConjugationSelector />
-        <NKButton handleClick={handleStart} text={startText}/>
-          {verbs.map((verb) => {
-            return (
-              <ul key={verb.dictionary_form}>
-                <li>dictionary: {verb.dictionary_form}</li>
-                <li>hiragana: {verb.hiragana}</li>
-                <li>polite non past: {verb.polite_non_past}</li>
-              </ul>
-            )
-          })}
+          {this.chooseDisplay()}
       </div>
     )
   }

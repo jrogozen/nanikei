@@ -14,12 +14,13 @@ const QuizActions = {
   },
   fetchVerbs: ({ language, conjugations }) => {
     return (dispatch) => {
-      dispatch(QuizActions.setStatus(constants.QUIZ_ACTIVE))
+      dispatch(QuizActions.setStatus(constants.QUIZ_LOADING))
 
       return api.verbs({ language, conjugations })
         .then((response) => {
           if (response.success && response.data) {
             dispatch(QuizActions.setVerbs(response.data))
+            return dispatch(QuizActions.setStatus(constants.QUIZ_ACTIVE))
           }
         })
     }
@@ -43,7 +44,7 @@ const QuizActions = {
   setStatus: (status) => {
     return (dispatch) => {
       return dispatch({
-        type: constants.SET_DISPATCH,
+        type: constants.SET_STATUS,
         payload: status
       })
     }
@@ -53,6 +54,29 @@ const QuizActions = {
       return dispatch({
         type: constants.SET_VERBS,
         payload: verbs
+      })
+    }
+  },
+  nextVerb: () => {
+    return (dispatch, getState) => {
+      const state = getState()
+      let verbLength = state.quiz.verbs.length
+      let currentIndex = state.quiz.currentIndex
+
+      if (currentIndex >= verbLength - 1) {
+        return dispatch(QuizActions.setStatus(constants.QUIZ_RESULTS))
+      } else {
+        return dispatch({
+          type: constants.INCREMENT_INDEX
+        })
+      }
+    }
+  },
+  logAnswer(correct) {
+    return (dispatch) => {
+      return dispatch({
+        type: constants.LOG_ANSWER,
+        payload: correct
       })
     }
   },
