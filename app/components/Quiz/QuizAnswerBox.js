@@ -38,11 +38,12 @@ const QuizAnswerBox = React.createClass({
       return false
     }
 
+    this.props.verifyAnswer(this.state.userInput)
+
     this.setState({
       userInput: ''
     })
 
-    this.props.verifyAnswer(this.state.userInput)
   },
   render() {
     let { correctedAnswer } = this.props
