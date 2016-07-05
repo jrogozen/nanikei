@@ -1,7 +1,7 @@
 require('es6-promise').polyfill();
 import fetch from 'isomorphic-fetch'
 
-import { formatEndpoint } from 'app/utils/ApiUtils'
+import { formatEndpoint } from './ApiUtils'
 
 const checkStatus = (response) => {
   if (response.status >= 200 && response.status < 300) {
