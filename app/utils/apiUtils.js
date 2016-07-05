@@ -16,22 +16,22 @@ export const stringify = (obj) => {
 }
 
 export const formatEndpoint = (path, queryParams) => {
-  if (queryParams) {
-    path = path + stringify(queryParams)
-  }
+  // if (queryParams) {
+  //   path = path + stringify(queryParams)
+  // }
 
-  if (typeof window === 'undefined') {
-    let port = process.env.PORT || constants.DEFAULT_PORT
-    let apiTarget
+  // if (typeof window === 'undefined') {
+  //   let port = process.env.PORT || constants.DEFAULT_PORT
+  //   let apiTarget
 
-    if (__DEV__) {
-      apiTarget = constants.API_TARGET_DEV
-    } else {
-      apiTarget = constants.API_TARGET_PROD
-    }
+  //   if (__DEV__) {
+  //     apiTarget = constants.API_TARGET_DEV
+  //   } else {
+  //     apiTarget = constants.API_TARGET_PROD
+  //   }
 
-    return `${apiTarget}:${port}/${path}`
-  } else {
-    return `${window.location.protocol}//${window.location.host}/${path}`
-  }
+  //   return `${apiTarget}:${port}/${path}`
+  // } else {
+  //   return `${window.location.protocol}//${window.location.host}/${path}`
+  // }
 }
