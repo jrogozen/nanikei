@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import constants from 'config/constants'
 
-const stringify = (obj) => {
+export const stringify = (obj) => {
   let str = []
 
   _.forEach(obj, (v, k) => {
@@ -15,7 +15,7 @@ const stringify = (obj) => {
   }
 }
 
-const formatEndpoint = (path, queryParams) => {
+export const formatEndpoint = (path, queryParams) => {
   if (queryParams) {
     path = path + stringify(queryParams)
   }
@@ -34,9 +34,4 @@ const formatEndpoint = (path, queryParams) => {
   } else {
     return `${window.location.protocol}//${window.location.host}/${path}`
   }
-}
-
-export {
-  formatEndpoint,
-  stringify
 }
