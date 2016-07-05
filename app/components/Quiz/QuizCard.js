@@ -14,7 +14,8 @@ const QuizCard = React.createClass({
     verbs: React.PropTypes.array
   },
   chooseDisplay() {
-    let { selectedConjugations, title, startText, handleStart, currentIndex, status, verbs } = this.props
+    let { selectedConjugations, title, startText, handleStart, currentIndex,
+      status, verbs, handleReset, resetText } = this.props
 
     switch (status) {
       case constants.QUIZ_PENDING:
@@ -42,6 +43,7 @@ const QuizCard = React.createClass({
           <div>
             <h1>Quiz Over Placeholder</h1>
             <QuizScore />
+            <NKButton handleClick={handleReset} text={resetText} />
           </div>
         )
       default:

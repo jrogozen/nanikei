@@ -14,7 +14,8 @@ const QuizQuestion = React.createClass({
   getInitialState() {
     let { selectedConjugations } = this.props
     return {
-      currentConjugation: selectedConjugations[array.getRandom(selectedConjugations)]
+      currentConjugation: selectedConjugations[array.getRandom(selectedConjugations)],
+      correctedAnswer: ''
     }
   },
   componentDidUpdate(prevProps) {
@@ -26,7 +27,8 @@ const QuizQuestion = React.createClass({
     let { selectedConjugations } = this.props
 
     this.setState({
-      currentConjugation: selectedConjugations[array.getRandom(selectedConjugations)]
+      currentConjugation: selectedConjugations[array.getRandom(selectedConjugations)],
+      correctedAnswer: ''
     })
   },
   matchQuestionAndAnswer(userInput) {
@@ -36,10 +38,18 @@ const QuizQuestion = React.createClass({
     let isCorrect = currentVerb[currentConjugation] === userInput
 
     dispatch(QuizActions.logAnswer(isCorrect))
-    dispatch(QuizActions.nextVerb())
+
+    if (isCorrect) {
+      dispatch(QuizActions.nextVerb())
+    } else {
+      this.setState({
+        correctedAnswer: currentVerb[currentConjugation]
+      })
+    }
   },
   render() {
     let { currentIndex, verbs } = this.props
+    let { correctedAnswer } = this.state
     let currentVerb = verbs[currentIndex]
 
     return (
@@ -49,6 +59,7 @@ const QuizQuestion = React.createClass({
           verb={currentVerb}
         />
         <QuizAnswerBox
+          correctedAnswer={correctedAnswer}
           verb={currentVerb}
           verifyAnswer={this.matchQuestionAndAnswer}
         />

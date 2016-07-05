@@ -1,5 +1,5 @@
 const initState = () => ({
-  isPending: false
+  error: null
 })
 
 const app = (state = initState(), action = {}) => {

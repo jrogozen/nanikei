@@ -17,9 +17,12 @@ function renderFullPage(html, initialState) {
     <html>
       <head>
         <title>nanikei</title>
+        <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
         <style>
           body {
             font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
+            line-height: 24px;
+            margin: 40px 20px;
           }
           .japanese {
             font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
@@ -31,7 +34,6 @@ function renderFullPage(html, initialState) {
         <script>
           window.__INITIAL_STATE__ = ${JSON.stringify(initialState)}
         </script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css"></script>
         <script src="/dist/bundle.js"></script>
       </body>
     </html>

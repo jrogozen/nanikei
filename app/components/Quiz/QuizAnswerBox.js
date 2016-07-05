@@ -4,11 +4,13 @@ import NKButton from 'app/components/NKButton'
 
 const QuizAnswerBox = React.createClass({
   propTypes: {
+    correctedAnswer: React.PropTypes.string,
     verb: React.PropTypes.object,
     verifyAnswer: React.PropTypes.func
   },
   getDefaultProps() {
     return {
+      correctedAnswer: '',
       verb: {},
       verifyAnswer: () => {}
     }
@@ -18,25 +20,52 @@ const QuizAnswerBox = React.createClass({
       userInput: ''
     }
   },
-  render() {
-    let { userInput } = this.state
-    let { verifyAnswer } = this.props
+  componentDidMount() {
+    window.addEventListener('keypress', this.handleNonClickSubmit)
+  },
+  componentWillUnmount() {
+    window.removeEventListener('keypress', this.handleNonClickSubmit)
+  },
+  handleNonClickSubmit(e) {
+    let key = e.which || e.keyCode
 
+    if (key === 13) {
+      this.handleSubmit()
+    }
+  },
+  handleSubmit() {
+    if (!this.state.userInput) {
+      return false
+    }
+
+    this.setState({
+      userInput: ''
+    })
+
+    this.props.verifyAnswer(this.state.userInput)
+  },
+  render() {
+    let { correctedAnswer } = this.props
     return (
       <div className="QuizAnswerBox">
         <input
           className="japanese"
           type="text"
-          value={userInput}
+          value={this.state.userInput}
           onChange={(e) => {
             this.setState({
               userInput: e.target.value
             })
           }}
         />
+        {correctedAnswer && (
+          <p style={{ fontSize: '18px', color: 'red', fontWeight: 'bold' }}>
+            {correctedAnswer}
+          </p>
+        )}
         <NKButton
           text="Submit"
-          handleClick={verifyAnswer.bind(null, userInput)}
+          handleClick={this.handleSubmit}
         />
       </div>
     )

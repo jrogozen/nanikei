@@ -1,3 +1,4 @@
+import _ from 'lodash'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -8,6 +9,10 @@ const QuizWrapper = React.createClass({
   fetchVerbs() {
     let { dispatch, selectedConjugations } = this.props
 
+    if (_.isEmpty(selectedConjugations)) {
+      return alert('Please select a conjugation type')
+    }
+
     return dispatch(QuizActions.fetchVerbs({
       language: 'japanese',
       conjugations: selectedConjugations
@@ -16,11 +21,18 @@ const QuizWrapper = React.createClass({
   handleStart() {
     this.fetchVerbs()
   },
+  handleReset() {
+    let { dispatch } = this.props
+
+    dispatch(QuizActions.reset())
+  },
   render() {
     return (
       <QuizCard
         currentIndex={this.props.currentIndex}
+        handleReset={this.handleReset}
         handleStart={this.handleStart}
+        resetText="また (again)"
         selectedConjugations={this.props.selectedConjugations}
         startText="スタート (start)"
         status={this.props.status}

@@ -12,14 +12,14 @@ const api = {
   },
   verbs: (queryParams = {}) => {
     let path = 'api/verbs'
-    let { language, conjugations } = queryParams
-    conjugations = conjugations || ''
+    let { language = '', conjugations = '', limit = '' } = queryParams
 
     return requester({
       method: 'get',
       path,
       queryParams: {
         language,
+        limit,
         conjugations: conjugations.join(',')
       }
     })

@@ -43,7 +43,9 @@ const quiz = (state = initState(), action = {}) => {
         incorrect: payload ? state.incorrect : state.incorrect + 1
       })
     case constants.RESET_QUIZ:
-      return initState()
+      return _.assign({}, initState(), {
+        possibleConjugations: state.possibleConjugations
+      })
     default:
       return state
   }

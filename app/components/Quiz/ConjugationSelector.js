@@ -50,11 +50,29 @@ const ConjugationSelector = React.createClass({
 
     this.props.dispatch(QuizActions.setSelectedConjugations(updatedArray))
   },
+  handleToggleAll(toggleOn) {
+    let updatedConjugations = _.assign({}, this.state.conjugations)
+
+    _.forEach(updatedConjugations, (value, conjugation) => {
+      updatedConjugations[conjugation] = toggleOn
+    })
+
+    let updatedArray = this.mapObjToArray(updatedConjugations)
+
+    this.setState({ conjugations: updatedConjugations })
+    this.props.dispatch(QuizActions.setSelectedConjugations(updatedArray))
+  },
   render() {
     let { conjugations } = this.state
 
     return (
       <form className="conjugation-selector">
+        <div className="toggle-all">
+          <ul>
+            <li onClick={this.handleToggleAll.bind(null, true)}>Toggle All</li>
+            <li onClick={this.handleToggleAll.bind(null, false)}>Untoggle All</li>
+          </ul>
+        </div>
         <ul>
           {_.map(conjugations, (value, conjugation) => {
             return (
