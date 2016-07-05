@@ -60,7 +60,7 @@ const ConjugationSelector = React.createClass({
             return (
               <li key={conjugation}>
                 <input type="checkbox" checked={value} onChange={this.onValueChange.bind(this, conjugation)}/>
-                {stringUtils.underScoreToTitle(conjugation)}
+                <span className="japanese">{stringUtils.underScoreToTitle(conjugation)}</span>
               </li>
             )
           })}

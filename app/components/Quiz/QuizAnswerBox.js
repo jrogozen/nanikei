@@ -25,6 +25,7 @@ const QuizAnswerBox = React.createClass({
     return (
       <div className="QuizAnswerBox">
         <input
+          className="japanese"
           type="text"
           value={userInput}
           onChange={(e) => {

@@ -14,9 +14,9 @@ const QuizVerb = React.createClass({
       <div className="QuizVerb">
         <div className="verb-info">
           <div className="verb-title">
-            Verb: {verb.dictionary_form}({verb.hiragana})
+            Verb: <span className="japanese">{verb.dictionary_form}({verb.hiragana})</span>
             <p>
-              Conjugate to: {currentConjugation}
+              Conjugate to: <span className="japanese">{currentConjugation}</span>
             </p>
           </div>
           <div className="verb-sub-title">
