@@ -10,9 +10,10 @@ import renderer from './middleware/renderer'
 
 require('./db')
 
-if (process.env.SEED) {
+// todo: need to figure out how to seed 1x
+// if (process.env.SEED) {
   require('./seed')
-}
+// }
 
 const DEBUG = process.env.NODE_ENV !== 'production'
 

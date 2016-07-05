@@ -48,4 +48,6 @@ seed(
     file: path.join(__dirname, 'db', 'csv', 'japanese.csv'),
     name: 'japanese'
   }
-).then(() => process.exit())
+)
+
+// .then(() => process.exit())
