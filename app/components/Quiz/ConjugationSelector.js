@@ -1,4 +1,5 @@
 import _ from 'lodash'
+import cx from 'classnames'
 import React from 'react'
 import { connect } from 'react-redux'
 
@@ -64,6 +65,9 @@ const ConjugationSelector = React.createClass({
     this.setState({ conjugations: updatedConjugations })
     this.props.dispatch(QuizActions.setSelectedConjugations(updatedArray))
   },
+  getToggledClass(checked) {
+    return cx({ toggled: checked })
+  },
   render() {
     let { conjugations } = this.state
 
@@ -71,16 +75,20 @@ const ConjugationSelector = React.createClass({
       <form className="ConjugationSelector">
         <div className="toggle-all">
           <ul>
-            <li onClick={this.handleToggleAll.bind(null, true)}>Toggle All</li>
-            <li onClick={this.handleToggleAll.bind(null, false)}>Untoggle All</li>
+            <li className="toggle toggle-on" onClick={this.handleToggleAll.bind(null, true)}>
+              <i className="material-icons">visibility</i><span>Toggle All</span>
+            </li>
+            <li className="toggle toggle-off" onClick={this.handleToggleAll.bind(null, false)}>
+              <i className="material-icons">visibility_off</i><span>Untoggle All</span>
+            </li>
           </ul>
         </div>
         <div className="toggles">
           <ul>
             {_.map(conjugations, (value, conjugation) => {
               return (
-                <li key={conjugation} onClick={this.onValueChange.bind(this, conjugation)}>
-                  <input type="checkbox" checked={value} onChange={this.onValueChange.bind(this, conjugation)}/>
+                <li className={this.getToggledClass(value)}key={conjugation} onClick={this.onValueChange.bind(this, conjugation)}>
+                  <input className="material-icons" type="checkbox" checked={value} onChange={this.onValueChange.bind(this, conjugation)}/>
                   <span className="japanese">{stringUtils.underScoreToTitle(conjugation)}</span>
                 </li>
               )

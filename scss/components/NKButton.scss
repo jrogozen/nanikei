@@ -1,0 +1,19 @@
+@import 'scss/includes/index.scss';
+
+.NKButton {
+  button {
+    background: inherit;
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: 2px solid $dark-green;
+    color: $dark-green;
+    font-weight: bold;
+    width: 100%;
+    transition: all 0.25s ease-in-out;
+    &:hover {
+      cursor: pointer;
+      color: white;
+      background: $dark-green;
+    }
+  }
+}

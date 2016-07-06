@@ -1,5 +1,7 @@
 import React from 'react'
 
+require('scss/components/NKButton')
+
 const NKButton = React.createClass({
   propTypes: {
     text: React.PropTypes.string,

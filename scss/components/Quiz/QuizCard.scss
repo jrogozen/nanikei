@@ -10,4 +10,11 @@
     border: 1px solid $light-grey;
     box-shadow: 0 5px 5px -4px rgba(0,0,0,.3)
   }
+  h2 {
+    color: $dark-green;
+    text-transform: uppercase;
+    font-weight: normal;
+    border-bottom: 2px solid $dark-green;
+    padding-bottom: 15px;
+  }
 }

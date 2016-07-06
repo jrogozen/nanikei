@@ -24,6 +24,7 @@ function renderFullPage(html, initialState) {
         />
         <meta content="yes" name="apple-mobile-web-app-capable"/>
         <meta content="yes" name="mobile-web-app-capable"/>
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet" />
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
         <link type="text/css" rel="stylesheet" href="/dist/style.css" />
       </head>
