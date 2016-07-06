@@ -24,7 +24,7 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, '..', 'dist'),
     filename: 'bundle.js',
-    publicPath: '/dist'
+    publicPath: '/dist/'
   },
   plugins: [
     new webpack.optimize.OccurenceOrderPlugin(),
@@ -55,13 +55,16 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader:  ExtractTextPlugin.extract('style-loader', 'css!postcss!sass'),
+        loader:  ExtractTextPlugin.extract('style-loader', 'css!postcss!sass?sourceMap'),
         include: path.resolve(__dirname, '..')
       },
       {
         test: /\.(jpe?g|png|gif|svg)$/, 
         loader: 'url', 
-        query: {limit: 10240} 
+        query: {
+          name: '[hash].[ext]',
+          limit: 10240
+        } 
       }
     ]
   },

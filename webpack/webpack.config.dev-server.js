@@ -68,7 +68,7 @@ module.exports = {
       loaders: commonLoaders.concat([
            {
               test: /\.scss$/,
-              loader: 'css!postcss!sass'
+              loader: 'css!postcss!resolve-url!sass?sourceMap'
            }
       ])
     },
