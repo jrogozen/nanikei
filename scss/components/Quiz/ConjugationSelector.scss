@@ -4,6 +4,9 @@
   margin-bottom: 40px;
   .toggle-all {
     margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid $off-white;
+    box-shadow: 0 5px 5px -7px rgba(0,0,0,.2);
     ul {
       li {
         cursor: pointer;

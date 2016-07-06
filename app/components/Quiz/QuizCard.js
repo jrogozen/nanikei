@@ -53,11 +53,11 @@ const QuizCard = React.createClass({
     }
   },
   render() {
-    let { title } = this.props
+    let { title, handleReset } = this.props
 
     return (
       <div className="QuizCard">
-        <h2>{title}</h2>
+        <h2 onClick={handleReset}>{title}</h2>
         <div className="quiz-content">
           {this.chooseDisplay()}
         </div>

@@ -44,7 +44,8 @@ const quiz = (state = initState(), action = {}) => {
       })
     case constants.RESET_QUIZ:
       return _.assign({}, initState(), {
-        possibleConjugations: state.possibleConjugations
+        possibleConjugations: state.possibleConjugations,
+        selectedConjugations: state.possibleConjugations
       })
     default:
       return state
