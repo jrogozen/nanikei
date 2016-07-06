@@ -16,18 +16,16 @@ function renderFullPage(html, initialState) {
     <!doctype html>
     <html>
       <head>
+        <meta charset="utf-8" />
         <title>nanikei</title>
+        <meta
+          content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0, minimal-ui"
+          name="viewport"
+        />
+        <meta content="yes" name="apple-mobile-web-app-capable"/>
+        <meta content="yes" name="mobile-web-app-capable"/>
         <link type="text/css" rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/4.2.0/normalize.min.css" />
-        <style>
-          body {
-            font-family: Helvetica Neue,Helvetica,Arial,sans-serif;
-            line-height: 24px;
-            margin: 40px 20px;
-          }
-          .japanese {
-            font-family:"ヒラギノ角ゴ Pro W3", "Hiragino Kaku Gothic Pro",Osaka, "メイリオ", Meiryo, "ＭＳ Ｐゴシック", "MS PGothic", sans-serif;
-          }
-        </style>
+        <link type="text/css" rel="stylesheet" href="/dist/style.css" />
       </head>
       <body>
         <div id="root">${html}</div>

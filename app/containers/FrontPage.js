@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 import QuizActions from 'app/actions/QuizActions'
 import QuizWrapper from 'app/components/Quiz/QuizWrapper'
 
+require('scss/containers/FrontPage')
+
 const FrontPage = React.createClass({
   statics: {
     serverRouteWillMount(reactContext) {

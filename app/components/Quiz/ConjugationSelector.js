@@ -5,6 +5,8 @@ import { connect } from 'react-redux'
 import QuizActions from 'app/actions/QuizActions'
 import { stringUtils } from 'app/utils/formatter'
 
+require('scss/components/Quiz/ConjugationSelector')
+
 const ConjugationSelector = React.createClass({
   propTypes: {
     possibleConjugations: React.PropTypes.array
@@ -66,23 +68,25 @@ const ConjugationSelector = React.createClass({
     let { conjugations } = this.state
 
     return (
-      <form className="conjugation-selector">
+      <form className="ConjugationSelector">
         <div className="toggle-all">
           <ul>
             <li onClick={this.handleToggleAll.bind(null, true)}>Toggle All</li>
             <li onClick={this.handleToggleAll.bind(null, false)}>Untoggle All</li>
           </ul>
         </div>
-        <ul>
-          {_.map(conjugations, (value, conjugation) => {
-            return (
-              <li key={conjugation}>
-                <input type="checkbox" checked={value} onChange={this.onValueChange.bind(this, conjugation)}/>
-                <span className="japanese">{stringUtils.underScoreToTitle(conjugation)}</span>
-              </li>
-            )
-          })}
-        </ul>
+        <div className="toggles">
+          <ul>
+            {_.map(conjugations, (value, conjugation) => {
+              return (
+                <li key={conjugation} onClick={this.onValueChange.bind(this, conjugation)}>
+                  <input type="checkbox" checked={value} onChange={this.onValueChange.bind(this, conjugation)}/>
+                  <span className="japanese">{stringUtils.underScoreToTitle(conjugation)}</span>
+                </li>
+              )
+            })}
+          </ul>
+        </div>
       </form>
     )
   }

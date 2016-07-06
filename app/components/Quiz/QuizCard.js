@@ -6,6 +6,8 @@ import NKButton from 'app/components/NKButton'
 import QuizScore from 'app/components/Quiz/QuizScore'
 import QuizQuestion from 'app/components/Quiz/QuizQuestion'
 
+require('scss/components/Quiz/QuizCard')
+
 const QuizCard = React.createClass({
   propTypes: {
     handleStart: React.PropTypes.func,
@@ -14,7 +16,7 @@ const QuizCard = React.createClass({
     verbs: React.PropTypes.array
   },
   chooseDisplay() {
-    let { selectedConjugations, title, startText, handleStart, currentIndex,
+    let { selectedConjugations, startText, handleStart, currentIndex,
       status, verbs, handleReset, resetText } = this.props
 
     switch (status) {
@@ -51,12 +53,14 @@ const QuizCard = React.createClass({
     }
   },
   render() {
-    let { title, startText, handleStart, verbs } = this.props
+    let { title } = this.props
 
     return (
       <div className="QuizCard">
         <h2>{title}</h2>
+        <div className="quiz-content">
           {this.chooseDisplay()}
+        </div>
       </div>
     )
   }

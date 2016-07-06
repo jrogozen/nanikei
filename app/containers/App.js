@@ -1,11 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+require('scss/containers/App')
+
 const App = React.createClass({
   render: function() {
     return (
       <div id="App" className="App">
-        <h1>App</h1>
         {React.cloneElement(this.props.children)}
       </div>
     )

@@ -1,7 +1,8 @@
 var path = require('path');
 var webpack = require('webpack');
 var autoprefixer = require('autoprefixer');
-// var cssnano = require('cssnano');
+var cssnano = require('cssnano');
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = {
   name: 'client side rendering',
@@ -12,7 +13,9 @@ module.exports = {
     'nanikei': __dirname, // doesn't work
     'config': 'config',
     'app': 'app',
-    'server': 'server'
+    'server': 'server',
+    'scss': 'scss',
+    'images': 'images'
   },
   entry: [
     'babel-polyfill',
@@ -31,7 +34,8 @@ module.exports = {
       __CLIENT__: true,
       __SERVER__: false,
       __DEV__: process.env.NODE_ENV === 'development'
-    }) 
+    }),
+    new ExtractTextPlugin('style.css'), 
   ],
   resolve: {
     root: path.resolve(__dirname, '..'),
@@ -51,7 +55,7 @@ module.exports = {
       },
       {
         test: /\.scss$/,
-        loader: 'style-loader!css-loader!sass-loader',
+        loader:  ExtractTextPlugin.extract('style-loader', 'css!postcss!sass'),
         include: path.resolve(__dirname, '..')
       },
       {
@@ -60,8 +64,8 @@ module.exports = {
         query: {limit: 10240} 
       }
     ]
+  },
+  postcss: function() {
+    return [autoprefixer, cssnano];
   }
-  // postcss: function() {
-  //   return [autoprefixer, cssnano];
-  // }
 };

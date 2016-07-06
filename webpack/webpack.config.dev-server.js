@@ -1,6 +1,8 @@
 var path = require('path');
 var fs = require('fs');
 var webpack = require('webpack');
+var autoprefixer = require('autoprefixer');
+var cssnano = require('cssnano');
 var assetsPath = path.join(__dirname, '..', 'dist');
 var commonLoaders = [
   {
@@ -38,7 +40,9 @@ module.exports = {
       'nanikei': __dirname, // doesn't work
       'config': 'config',
       'app': 'app',
-      'server': 'server'
+      'server': 'server',
+      'scss': 'scss',
+      'images': 'images'
     },
     entry: {
       server: "./server"
@@ -63,14 +67,17 @@ module.exports = {
     module: {
       loaders: commonLoaders.concat([
            {
-              test: /\.css$/,
-              loader: 'css/locals?module&localIdentName=[name]__[local]___[hash:base64:5]'
+              test: /\.scss$/,
+              loader: 'css!postcss!sass'
            }
       ])
     },
     resolve: {
       root: [path.join(__dirname, '..')],
-      extensions: ['', '.js', '.jsx', '.css'],
+      extensions: ['', '.js', '.jsx', '.scss'],
+    },
+    postcss: function() {
+        return [autoprefixer, cssnano];
     },
     plugins: [
         new webpack.DefinePlugin({
