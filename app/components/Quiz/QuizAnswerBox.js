@@ -59,7 +59,7 @@ const QuizAnswerBox = React.createClass({
             })
           }}
         />
-        {correctedAnswer && this.state.userInput.length === 0 &&(
+        {correctedAnswer && !this.state.userInput.length &&(
           <p style={{ fontSize: '18px', color: 'red', fontWeight: 'bold' }}>
             {correctedAnswer}
           </p>
