@@ -1,5 +1,7 @@
 ## nanikei ##
 
+japanese verb conjugation quiz built with react and express.
+
 ### build process ###
 
 #### dev ####
