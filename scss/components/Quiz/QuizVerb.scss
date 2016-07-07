@@ -1,0 +1,17 @@
+@import 'scss/includes/index.scss';
+
+.QuizVerb {
+  text-align: center;
+  .verb-title {
+    font-size: 68px;
+    .hiragana {
+      font-size: 24px;
+    }
+  }
+  .verb-sub-title {
+    font-size: 36px;
+  }
+  .verb-body {
+
+  }
+}

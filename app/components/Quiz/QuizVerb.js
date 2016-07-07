@@ -1,5 +1,7 @@
 import React from 'react'
 
+require('scss/components/Quiz/QuizVerb')
+
 const QuizVerb = React.createClass({
   propTypes: {
     verb: React.PropTypes.object
@@ -12,16 +14,17 @@ const QuizVerb = React.createClass({
 
     return (
       <div className="QuizVerb">
-        <div className="verb-info">
-          <div className="verb-title">
-            Verb: <span className="japanese">{verb.dictionary_form}({verb.hiragana})</span>
-            <p>
-              Conjugate to: <span className="japanese">{currentConjugation}</span>
-            </p>
-          </div>
-          <div className="verb-sub-title">
-            Definition: {verb.definition}
-          </div>
+        <div className="verb-title">
+          <span className="japanese">{verb.dictionary_form}</span>
+          <p className="japanese hiragana">({verb.hiragana})</p>
+        </div>
+        <div className="verb-sub-title">
+          {verb.definition}
+        </div>
+        <div className="verb-body">
+          <p>
+            (<span className="japanese">{currentConjugation}</span>)
+          </p>
         </div>
       </div>
     )
