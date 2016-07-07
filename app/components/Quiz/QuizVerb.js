@@ -1,5 +1,7 @@
 import React from 'react'
 
+import { stringUtils } from 'app/utils/formatter'
+
 require('scss/components/Quiz/QuizVerb')
 
 const QuizVerb = React.createClass({
@@ -9,6 +11,11 @@ const QuizVerb = React.createClass({
   getDefaultProps() {
     verb: {}
   },
+  shouldShowHiragana() {
+    let { verb } = this.props
+
+    return verb.hiragana !== verb.dictionary_form
+  },
   render() {
     let { verb, currentConjugation } = this.props
 
@@ -16,15 +23,13 @@ const QuizVerb = React.createClass({
       <div className="QuizVerb">
         <div className="verb-title">
           <span className="japanese">{verb.dictionary_form}</span>
-          <p className="japanese hiragana">({verb.hiragana})</p>
+          {this.shouldShowHiragana() && (<span className="hiragana japanese">({verb.hiragana})</span>)}
         </div>
         <div className="verb-sub-title">
           {verb.definition}
         </div>
-        <div className="verb-body">
-          <p>
-            (<span className="japanese">{currentConjugation}</span>)
-          </p>
+        <div className="verb-small-title">
+          <span className="japanese">{stringUtils.underScoreToTitle(currentConjugation)} conjugation</span>
         </div>
       </div>
     )

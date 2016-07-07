@@ -2,6 +2,7 @@
 
 .NKButton {
   button {
+    @include no-select();
     background: inherit;
     padding: 10px 20px;
     border-radius: 10px;
@@ -13,6 +14,17 @@
     &:hover {
       cursor: pointer;
       color: white;
+      background: $dark-green;
+    }
+  }
+  &.embedded {
+    height: 100%;
+    position: absolute;
+    button {
+      color: white;
+      height: 100%;
+      border: 0;
+      border-radius: 0;
       background: $dark-green;
     }
   }

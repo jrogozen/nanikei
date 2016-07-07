@@ -1,0 +1,11 @@
+@import 'scss/includes/index.scss';
+
+.NKInput {
+  width: 100%;
+  input {
+    @include no-select();
+    width: 100%;
+    padding: 20px;
+    font-size: 24px;
+  }
+}

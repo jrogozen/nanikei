@@ -1,6 +1,10 @@
 import React from 'react'
 
 import NKButton from 'app/components/NKButton'
+import NKInput from 'app/components/NKInput'
+import QuizProgressBar from 'app/components/Quiz/QuizProgressBar'
+
+require('scss/components/Quiz/QuizAnswerBox')
 
 const QuizAnswerBox = React.createClass({
   propTypes: {
@@ -46,28 +50,32 @@ const QuizAnswerBox = React.createClass({
 
   },
   render() {
-    let { correctedAnswer } = this.props
+    let { correctedAnswer, currentIndex, maxLength } = this.props
+
     return (
       <div className="QuizAnswerBox">
-        <input
-          className="japanese"
-          type="text"
-          value={this.state.userInput}
-          onChange={(e) => {
-            this.setState({
-              userInput: e.target.value
-            })
-          }}
-        />
+        <div className="form-wrapper">
+          <NKInput
+            japanese
+            value={this.state.userInput}
+            handleChange={(event) => {
+              this.setState({
+                userInput: event.target.value
+              })
+            }}
+          />
+          <NKButton
+            embedded
+            text={<i className="material-icons">subdirectory_arrow_right</i>}
+            handleClick={this.handleSubmit}
+          />
+        </div>
+        <QuizProgressBar maxLength={maxLength} currentIndex={currentIndex} />
         {correctedAnswer && !this.state.userInput.length &&(
           <p style={{ fontSize: '18px', color: 'red', fontWeight: 'bold' }}>
             {correctedAnswer}
           </p>
         )}
-        <NKButton
-          text="Submit"
-          handleClick={this.handleSubmit}
-        />
       </div>
     )
   }

@@ -60,6 +60,8 @@ const QuizQuestion = React.createClass({
         />
         <QuizAnswerBox
           correctedAnswer={correctedAnswer}
+          currentIndex={currentIndex}
+          maxLength={verbs.length}
           verb={currentVerb}
           verifyAnswer={this.matchQuestionAndAnswer}
         />

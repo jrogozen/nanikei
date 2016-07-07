@@ -19,7 +19,7 @@
           position: relative;
           .material-icons {
             position: absolute;
-            top: 5px;
+            top: 2.5px;
             font-size: 16px;
           }
           span {
@@ -35,8 +35,13 @@
         cursor: pointer;
         margin-bottom: 5px;
         display: inline-block;
-        width: 50%;
         line-height: 24px;
+        font-size: 14px;
+        width: 100%;
+        @include breakpoint(lg-and-up) {
+          font-size: 16px;
+          width: 50%;
+        }
         span {
           text-decoration: line-through;
         }

@@ -1,0 +1,18 @@
+@import 'scss/includes/index.scss';
+
+.QuizProgressBar {
+  width: 100%;
+  .outline {
+    position: relative;
+    height: 10px;
+    width: 100%;
+    background: $off-white;
+  }
+  .filled {
+    position: absolute;
+    height: 10px;
+    left: 0;
+    top: 0;
+    background: $green;
+  }
+}

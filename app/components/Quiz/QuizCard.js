@@ -35,7 +35,7 @@ const QuizCard = React.createClass({
               selectedConjugations={selectedConjugations}
               verbs={verbs}
             />
-            <QuizScore />
+            {/*<QuizScore />*/}
           </div>
         )
       case constants.QUIZ_LOADING:

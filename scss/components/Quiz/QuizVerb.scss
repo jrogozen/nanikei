@@ -4,14 +4,21 @@
   text-align: center;
   .verb-title {
     font-size: 68px;
-    .hiragana {
-      font-size: 24px;
-    }
+    margin-bottom: 20px;
+  }
+  .hiragana {
+    font-size: 22px;
+  }
+  .verb-small-title {
+    font-size: 18px;
+    margin-bottom: 40px;
   }
   .verb-sub-title {
-    font-size: 36px;
+    font-size: 34px;
+    margin-bottom: 40px;
   }
   .verb-body {
-
+    text-align: left;
+    margin-bottom: 5px;
   }
 }
