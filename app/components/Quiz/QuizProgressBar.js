@@ -16,7 +16,9 @@ const QuizProgressBar = React.createClass({
   calculateWidth() {
     let { maxLength, currentIndex } = this.props
 
-    return currentIndex / maxLength * 100 || '0%'
+    let percent = currentIndex / maxLength * 100 || '0'
+
+    return `${percent}%`
   },
   render() {
 
