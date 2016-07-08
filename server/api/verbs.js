@@ -1,16 +1,7 @@
 import _ from 'lodash'
-import fs from 'fs'
-import path from 'path'
 
 import { query } from '../db'
 import constants from '../../config/constants'
-
-const handleError = (res, err) => {
-  return res.status(500).send({
-    success: false,
-    error: err
-  })
-}
 
 const requireValue = (value, i) => {
   return `${i === 0 ? ' WHERE' : ' AND'} ${value} IS NOT NULL AND ${value} <> '' AND ${value} <> 'X'`

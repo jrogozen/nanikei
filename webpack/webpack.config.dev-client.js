@@ -39,7 +39,7 @@ module.exports = {
   ],
   resolve: {
     root: path.resolve(__dirname, '..'),
-    extensions: ['', '.js', '.scss']
+    extensions: ['', '.js', '.scss', '.json']
   },
   module: {
     loaders: [

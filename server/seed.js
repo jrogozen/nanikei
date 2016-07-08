@@ -12,7 +12,7 @@ function setup(tables) {
   return Promise.all(promises)
 }
 
-function seed(fileObj) {
+function seedCsv(fileObj) {
   let parsedCsv = parseCsv(fileObj.file)
   let { headers, data } = parsedCsv
 
@@ -42,12 +42,31 @@ function seed(fileObj) {
     })
 }
 
+function seed() {
+  let createArticles = `CREATE TABLE articles(id SERIAL PRIMARY KEY not null, created_at bigint, updated_at bigint, active BOOLEAN, content TEXT, title TEXT, description TEXT, category TEXT)`
+
+  return query(createArticles)
+    .then(() => {
+      let promises = []
+      let article = require('server/db/json/article.json')
+      let dataString = `INSERT INTO articles(title, description, created_at, updated_at, active, content, category) values
+        ('${article.title}', '${article.description}', '${article.created_at}', '${article.updated_at}', '${article.active}', '${article.content}', '${article.category}')
+      `
+
+      promises.push(query(dataString))
+
+      return Promise.all(promises)
+        .then(() => console.log(chalk.blue.bold('articles seeded')))
+    })
+}
+
 setup()
-seed(
+seedCsv(
   {
     file: path.join(__dirname, 'db', 'csv', 'japanese.csv'),
     name: 'japanese'
   }
 )
+seed()
 
 // .then(() => process.exit())

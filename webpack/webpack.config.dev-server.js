@@ -74,7 +74,7 @@ module.exports = {
     },
     resolve: {
       root: [path.join(__dirname, '..')],
-      extensions: ['', '.js', '.jsx', '.scss'],
+      extensions: ['', '.js', '.jsx', '.scss', '.json'],
     },
     postcss: function() {
         return [autoprefixer, cssnano];
