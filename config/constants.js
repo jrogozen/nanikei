@@ -14,7 +14,8 @@ const dispatchConstants = {
   'SET_VERBS': 'SET_VERBS',
   'SET_STATUS': 'SET_STATUS',
   'INCREMENT_INDEX': 'INCREMENT_INDEX',
-  'LOG_ANSWER': 'LOG_ANSWER'
+  'LOG_ANSWER': 'LOG_ANSWER',
+  'SET_ARTICLES': 'SET_ARTICLES'
 }
 
 const valueConstants = {

@@ -1,8 +1,10 @@
 import Promise from 'promise'
 import path from 'path'
 import chalk from 'chalk'
+
 import { query } from './db'
 import { parseCsv } from './utils/csvUtils'
+import articles from 'server/db/articles'
 
 function setup(tables) {
   const promises = [
@@ -48,12 +50,14 @@ function seed() {
   return query(createArticles)
     .then(() => {
       let promises = []
-      let article = require('server/db/json/article.json')
-      let dataString = `INSERT INTO articles(title, description, created_at, updated_at, active, content, category) values
-        ('${article.title}', '${article.description}', '${article.created_at}', '${article.updated_at}', '${article.active}', '${article.content}', '${article.category}')
-      `
 
-      promises.push(query(dataString))
+      articles.forEach((article) => {
+        let dataString = `INSERT INTO articles(title, description, created_at, updated_at, active, content, category) values
+          ('${article.title}', '${article.description}', '${article.created_at}', '${article.updated_at}', '${article.active}', '${article.content}', '${article.category}')
+        `
+
+        promises.push(query(dataString))
+      })
 
       return Promise.all(promises)
         .then(() => console.log(chalk.blue.bold('articles seeded')))

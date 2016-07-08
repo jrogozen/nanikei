@@ -23,6 +23,15 @@ const api = {
         conjugations: conjugations.join(',')
       }
     })
+  },
+  articles: (queryParams) => {
+    let path = 'api/articles'
+
+    return requester({
+      method: 'get',
+      path,
+      queryParams
+    })
   }
 }
 
