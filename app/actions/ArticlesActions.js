@@ -22,6 +22,27 @@ const ArticlesActions = {
         payload: articles
       })
     }
+  },
+  setStatus: (status) => {
+    return (dispatch) => {
+      return dispatch({
+        type: constants.SET_ARTICLES_STATUS,
+        payload: status
+      })
+    }
+  },
+  postArticle: (article) => {
+    return (dispatch) => {
+      dispatch(ArticlesActions.setStatus(constants.ARTICLES_PENDING))
+
+      // todo: add model usage
+      return api.post.article(article)
+        .then((response) => {
+          if (response.success) {
+            return dispatch(ArticlesActions.setStatus(constants.ARTICLES_LOADED))
+          }
+        })
+    }
   }
 }
 

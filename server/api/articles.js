@@ -22,4 +22,33 @@ export default function articles(router) {
       })
       .catch((err) => res.send({ success: false, error: err}))
   })
+
+  router.post('/articles', (req, res) => {
+    let { category, title, description, active, content } = req.body
+    let created_at = Date.now()
+    let updated_at = Date.now()
+
+    let newArticle = {
+      category,
+      title,
+      description,
+      active,
+      content,
+      created_at,
+      updated_at
+    }
+
+    query(`INSERT INTO articles(title, description, active, created_at, updated_at, content, category) values
+      ('${title}', '${description}', '${active}', '${created_at}', '${updated_at}', '${content}', '${category}')
+    `)
+      .then((data) => {
+        if (data && data.rowCount === 1) {
+          res.send({
+            success: true,
+            data: newArticle
+          })
+        }
+      })
+      .catch((err) => res.send({ success: false, error: err}))
+  })
 }

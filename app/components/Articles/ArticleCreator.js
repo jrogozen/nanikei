@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 
+import NKButton from 'app/components/NKButton'
+
 let RichTextEditor
 
 if (__CLIENT__) {
@@ -32,6 +34,20 @@ const ArticleCreator = React.createClass({
   },
   handleChange(text) {
     this.setState({ text })
+  },
+  onSubmit(e) {
+    e.preventDefault()
+
+    let { text, title, active, description, category } = this.state
+    let { handleSubmit } = this.props
+
+    return handleSubmit({
+      title,
+      active,
+      description,
+      category,
+      content: text.toString('markdown')
+    })
   },
   render() {
     let { description, active, category, loaded, text, title } = this.state
@@ -88,6 +104,10 @@ const ArticleCreator = React.createClass({
             onChange={this.handleChange}
           />
         )}
+        <NKButton
+          handleClick={this.onSubmit}
+          text="Save"
+        />
         </form>
       </div>
     )

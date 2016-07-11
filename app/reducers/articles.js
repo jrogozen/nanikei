@@ -20,6 +20,10 @@ const articles = (state = initState(), action = {}) => {
       return _.assign({}, state, {
         articles: mergedArticles
       })
+    case constants.SET_ARTICLES_STATUS:
+      return _.assign({}, state, {
+        status: payload
+      })
     default:
       return state
   }

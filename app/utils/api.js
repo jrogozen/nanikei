@@ -32,6 +32,17 @@ const api = {
       path,
       queryParams
     })
+  },
+  post: {
+    article: (body) => {
+      let path = 'api/articles'
+
+      return requester({
+        method: 'post',
+        path,
+        body
+      })
+    }
   }
 }
 
