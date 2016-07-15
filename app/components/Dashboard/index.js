@@ -1,8 +1,6 @@
 import React from 'react'
 import { connect } from 'react-redux'
-
-import ArticlesActions from 'app/actions/ArticlesActions'
-import ArticleCreator from 'app/components/Articles/ArticleCreator'
+import { Link } from 'react-router'
 
 const Dashboard = React.createClass({
   propTypes: {
@@ -14,22 +12,11 @@ const Dashboard = React.createClass({
   getDefaultProps() {
 
   },
-  submitArticle(article) {
-    let { dispatch } = this.props
-    let { router } = this.context
-
-    return dispatch(ArticlesActions.postArticle(article))
-      .then(() => {
-        router.push('/')
-      })
-  },
   render() {
     return (
       <div className="Dashboard">
         <h1>Dashboard</h1>
-        <ArticleCreator
-          handleSubmit={this.submitArticle}
-        />
+        <Link to="/admin/articles/create">New Artice</Link>
       </div>
     )
   }

@@ -23,7 +23,7 @@ export default function articles(router) {
       .catch((err) => res.send({ success: false, error: err}))
   })
 
-  router.post('/articles', (req, res) => {
+  /*router.post('/articles', (req, res) => {
     let { category, title, description, active, content } = req.body
     let created_at = Date.now()
     let updated_at = Date.now()
@@ -50,5 +50,5 @@ export default function articles(router) {
         }
       })
       .catch((err) => res.send({ success: false, error: err}))
-  })
+  })*/
 }

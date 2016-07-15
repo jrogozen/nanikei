@@ -1,0 +1,16 @@
+@import 'scss/includes/index.scss';
+
+.ContentPageWrapper {
+  width: 100%;
+  margin: 0 auto;
+  @include breakpoint(md-and-up) {
+    width: 80%;
+  }
+  .content-page-main {
+    border-radius: 4px;
+    width: 100%;
+    background: white;
+    padding: 40px;
+    box-shadow: 0 5px 5px -4px rgba(0,0,0,.3);
+  }
+}
