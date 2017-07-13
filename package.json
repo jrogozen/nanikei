@@ -15,7 +15,7 @@
     "postinstall": "npm run clean && npm run build:dev:server && npm run build:dev:client"
   },
   "engines": {
-    "node": "4.2.4",
+    "node": "6.11.1",
     "npm": "2.14.x"
   },
   "author": "jon rogozen",
