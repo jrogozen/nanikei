@@ -59,7 +59,7 @@
     "postcss": "^5.0.21",
     "postcss-loader": "^0.9.1",
     "promise": "^7.1.1",
-    "qs": "^6.2.0",
+    "qs": "^6.9.7",
     "react": "^15.1.0",
     "react-dom": "^15.1.0",
     "react-redux": "^4.4.5",
